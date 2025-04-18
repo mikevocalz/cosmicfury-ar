@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 import { StyleSheet, View, Text } from 'react-native';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 export default function SeasonInfo() {
   return (

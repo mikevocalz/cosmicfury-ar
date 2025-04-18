@@ -30,6 +30,11 @@ export {
 
 SplashScreen.preventAutoHideAsync();
 
+export const unstable_settings = {
+  // Ensure that reloading on `/modal` keeps a back button present.
+  initialRouteName: '(tabs)',
+};
+
 export default function RootLayout() {
   const hasMounted = useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
@@ -63,18 +68,30 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+        <StatusBar
+          style={isDarkColorScheme ? 'light' : 'dark'}
+          //backgroundColor="#000"
+          translucent
+          animated
+        />
         <Stack>
           <Stack.Screen
             name="(tabs)"
             options={{
               headerShown: false,
+              navigationBarTranslucent: false,
+              navigationBarColor: 'rgba(0,0,0,1)',
             }}
           />
           <Stack.Screen
             name="modal"
-            options={{ headerBackVisible: true, presentation: 'fullScreenModal' }}
+            options={{
+              freezeOnBlur: true,
+              headerBackVisible: true,
+              presentation: 'fullScreenModal',
+            }}
           />
+          <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>
     </GestureHandlerRootView>

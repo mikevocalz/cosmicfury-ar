@@ -18,7 +18,7 @@ const CenterButton = ({ onPress }: any) => {
             },
           ]}
           contentFit="contain"
-          transition={180}
+          transition={80}
         />
         {/* <Image
           alt="cosmic orbs"

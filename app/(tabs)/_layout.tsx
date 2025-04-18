@@ -1,7 +1,7 @@
+import { Image } from 'expo-image';
 import { Link, Tabs, useRouter } from 'expo-router';
 import { Platform } from 'react-native';
 
-import { HeaderButton } from '../../components/HeaderButton';
 import { ThemeToggle } from '../../components/ThemeToggle';
 import { IconSymbol } from '../../components/icons/IconSymbol';
 
@@ -52,7 +52,19 @@ export default function TabLayout() {
         headerRight: () => {
           return <ThemeToggle />;
         },
-        headerTitle: 'Cosmic Fury AR',
+        headerTitle: () => (
+          <Image
+            alt="app-logo"
+            source={require('assets/images/cosmic-ar-logo-cut.png')}
+            contentFit="contain"
+            style={{
+              aspectRatio: 16 / 9,
+              width: 220,
+              height: Platform.OS === 'ios' ? 80 : 100,
+              marginTop: Platform.OS === 'ios' ? -10 : 0,
+            }}
+          />
+        ),
         headerTitleAlign: 'left',
       }}>
       <Tabs.Screen
@@ -65,6 +77,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="add"
         options={{
+          freezeOnBlur:true,
           tabBarItemStyle: {
             backgroundColor: 'transparent',
             //overflowX: 'hidden',
@@ -74,14 +87,8 @@ export default function TabLayout() {
             pointerEvents: 'auto',
           },
           title: '',
-          // tabBarIcon: ({ color }) => (
-          //   <TabBarIcon name="plus" color={color} library="FontAwesome5" />
-          // ),
-
           tabBarButton: (props) => (
-            <>
-              <CenterButton {...props} onPress={() => router.navigate('/modal')} />
-            </>
+              <CenterButton {...props} onPress={() => router.navigate('../modal')} />
           ),
         }}
       />
